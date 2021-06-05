@@ -1,27 +1,39 @@
-let currentPokemon;
+let showAllPokemon;
 
 async function loadPokemon(){
 
-    let url = 'https://pokeapi.co/api/v2/pokemon/charizard'; // load api link
-    let response = await fetch(url); // to upload the url
-    currentPokemon = await response.json(); // to response as a JSON
+    let urlParams = new URLSearchParams(window.location.search);
+    let pokeName = urlParams.get('name');
     
-    console.log('load Pokemon', currentPokemon); 
-
-    renderPokemonInfo();
+    
+    let url = `https://pokeapi.co/api/v2/pokemon/${pokeName}`; // load api link
+    let response = await fetch(url); // to upload the url
+    showAllPokemon = await response.json(); // to response as a JSON
+    
+   
+    pokemonInfo();
+    
+   
     
 }
 
-function renderPokemonInfo(){
+function pokemonInfo(){
 
-    document.getElementById('pokeName').innerHTML = currentPokemon['name'];
-    document.getElementById('showPoke').src = currentPokemon['sprites']['front_default'];
-    document.getElementById('infos').innerHTML = currentPokemon['height'];
-    document.getElementById('attack').innerHTML = currentPokemon['moves']['0']['move']['name'];
-    document.getElementById('weight').innerHTML = currentPokemon['weight'];
-    document.getElementById('type').innerHTML = currentPokemon['types']['0']['type']['name'];
-    document.getElementById('forms').innerHTML = currentPokemon['forms']['0']['name'];    
+    document.getElementById('pokeName').innerHTML = showAllPokemon['name'];
+    document.getElementById('showPoke').src = showAllPokemon['sprites']['front_default'];
+    document.getElementById('infos').innerHTML = showAllPokemon['height'];
+    document.getElementById('attack').innerHTML = showAllPokemon['moves']['0']['move']['name'];
+    document.getElementById('weight').innerHTML = showAllPokemon['weight'];
+    document.getElementById('type').innerHTML = showAllPokemon['types']['0']['type']['name'];
+    document.getElementById('forms').innerHTML = showAllPokemon['forms']['0']['name'];    
 
+
+}
+
+function openPokeDex(){
+
+    let pokeName = document.getElementById('searchPoke').value;
+    window.location.href = `index.html?name=${pokeName}`;
 
 }
 

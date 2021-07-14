@@ -20,7 +20,7 @@ async function loadPokemon(){
 function pokemonInfo(){
 
     document.getElementById('pokeName').innerHTML = showAllPokemon['name'];
-    document.getElementById('showPoke').src = showAllPokemon['sprites']['front_default'];
+    document.getElementById('showPoke').src = showAllPokemon['sprites']['other']['official-artwork']['front_default'];
     document.getElementById('infos').innerHTML = showAllPokemon['height'];
     document.getElementById('attack').innerHTML = showAllPokemon['moves']['0']['move']['name'];
     document.getElementById('weight').innerHTML = showAllPokemon['weight'];
